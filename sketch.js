@@ -29,6 +29,12 @@ async function fetchQuantumEntropy() {
       pulse.localRandomValue ||
       pulse.randomValue;
 
+      const localNoise = Array.from(crypto.getRandomValues(new Uint8Array(8)))
+        .map(b => b.toString(16).padStart(2, '0'))
+        .join('');
+
+      outputValue += localNoise;
+
     if (!outputValue) {
       throw new Error('No entropy value found');
     }
