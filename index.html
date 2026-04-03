@@ -125,13 +125,14 @@
     </footer>
 
     <script type="module">
-  import { fetchLatestPulse } from 'https://cdn.skypack.dev/@buff-beacon-project/curby-client';
+      import { fetchLatestPulse } from 'https://esm.sh/@buff-beacon-project/curby-client';
 
-  window.fetchCurbyPulse = async function () {
-    const pulse = await fetchLatestPulse();
-    return pulse;
-  };
-</script>
+      window.fetchCurbyPulse = async function () {
+        const pulse = await fetchLatestPulse();
+        return pulse;
+      };
+    </script>
+
 
     <script src="sketch.js"></script>
 
