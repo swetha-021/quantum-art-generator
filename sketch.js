@@ -8,7 +8,7 @@ function setup() {
 }
 
 
-const CURBY_URLS = [];
+// const CURBY_URLS = [];
 
 async function fetchQuantumEntropy() {
   document.getElementById('apiStatus').textContent = 'Fetching...';
