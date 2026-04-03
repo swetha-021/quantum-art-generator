@@ -187,7 +187,7 @@ function startArt(numbers) {
 
       circle(x, y, size);
 
-      drawingContext.shadowBlur = 0;
+      drawingContext.shadowBlur = 40;
     }
 
     if (style === 'waves') {
