@@ -8,42 +8,45 @@ function setup() {
 }
 
 
-const CURBY_URLS = ['/api/entropy'];
+const CURBY_URLS = [];
 
 async function fetchQuantumEntropy() {
   document.getElementById('apiStatus').textContent = 'Fetching...';
   document.getElementById('apiStatus').className = 'info-value status-fetching';
 
-  for (let url of CURBY_URLS) {
-    try {
-        const response = await fetch(url);
-        if (!response.ok) continue;
-        const data = await response.json();
-        console.log('CURBy data received:', data);
-        const pulse = data.pulse || data;
-        const outputValue = pulse.outputValue || pulse.localRandomValue;
+  try {
+    const pulse = await window.fetchCurbyPulse();
 
-      if (!outputValue) continue;
+    console.log('CURBy pulse:', pulse);
 
-      quantumData = pulse;
+    const outputValue =
+      pulse.outputValue ||
+      pulse.localRandomValue ||
+      pulse.randomValue;
 
-      document.getElementById('apiStatus').textContent = '✅ Quantum Connected';
-      document.getElementById('apiStatus').className = 'info-value status-connected';
-      document.getElementById('pulseId').textContent = pulse.pulseIndex || '—';
-      document.getElementById('pulseTime').textContent = new Date(pulse.timeStamp).toLocaleString();
-      document.getElementById('entropyValue').textContent = outputValue.substring(0, 32) + '...';
-      document.getElementById('bitsUsed').textContent = '512 bits';
-      document.getElementById('entropySource').textContent = 'CURBy quantum beacon';
-
-      animateTrustChain();
-      return outputValue;
-
-    } catch (err) {
-      console.warn('Proxy attempt failed, trying next...', err);
+    if (!outputValue) {
+      throw new Error('No entropy value found');
     }
-  }
 
-  return useFallback();
+    quantumData = pulse;
+
+    document.getElementById('apiStatus').textContent = '✅ Quantum Connected';
+    document.getElementById('apiStatus').className = 'info-value status-connected';
+    document.getElementById('pulseId').textContent = pulse.pulseIndex || pulse.index || '—';
+    document.getElementById('pulseTime').textContent =
+      new Date(pulse.timeStamp || pulse.timestamp).toLocaleString();
+    document.getElementById('entropyValue').textContent =
+      outputValue.substring(0, 32) + '...';
+    document.getElementById('bitsUsed').textContent = '512 bits';
+    document.getElementById('entropySource').textContent =
+      'CURBy quantum beacon';
+
+    animateTrustChain();
+    return outputValue;
+  } catch (err) {
+    console.warn('CURBy fetch failed:', err);
+    return useFallback();
+  }
 }
 
 function useFallback() {
