@@ -181,7 +181,13 @@ function startArt(numbers) {
 
     if (style === 'particles') {
       noStroke();
+
+      drawingContext.shadowBlur = 25;
+      drawingContext.shadowColor = `rgba(${c[0]}, ${c[1]}, ${c[2]}, 0.8)`;
+
       circle(x, y, size);
+
+      drawingContext.shadowBlur = 0;
     }
 
     if (style === 'waves') {
