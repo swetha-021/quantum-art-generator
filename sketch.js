@@ -16,7 +16,7 @@ async function fetchQuantumEntropy() {
 
   try {
     const response = await fetch(
-      'https://random.colorado.edu/beacon/2.0/pulse/last.json'
+      'https://beacon.nist.gov/beacon/2.0/pulse/last'
     );
 
     const data = await response.json();
