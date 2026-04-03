@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quantum Art Generator</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  </head>
+
+  <body>
+
+    <header>
+      <h1>⚛️ Quantum Art Generator</h1>
+      <p class="subtitle">
+        Every brushstroke sourced from real quantum entangled photons
+        via the CURBy Beacon — University of Colorado Boulder
+      </p>
+    </header>
+
+    <main>
+
+      <section class="controls-panel">
+
+        <div class="control-group">
+          <h3> Art Style</h3>
+          <select id="artStyle">
+            <option value="particles">Particle Storm</option>
+            <option value="waves">Quantum Waves</option>
+            <option value="constellation">Constellation</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <h3> Color Mood</h3>
+          <select id="colorMood">
+            <option value="cosmic">Cosmic</option>
+            <option value="ocean">Ocean</option>
+            <option value="fire">Fire</option>
+            <option value="forest">Forest</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <h3> Entropy Speed</h3>
+          <input type="range" id="speed" min="1" max="10" value="5" />
+          <span id="speedValue">5</span>
+        </div>
+
+        <button id="generateBtn">⚛️ Generate Quantum Art</button>
+        <button id="clearBtn">🗑️ Clear Canvas</button>
+        <button id="saveBtn">💾 Save Artwork</button>
+
+      </section>
+      
+
+      <section class="canvas-panel">
+        <div id="canvas-container"></div>
+      </section>
+
+      
+
+      <section class="info-panel">
+
+        <h3> Quantum Source</h3>
+
+        <div class="info-box">
+          <p class="info-label">Status</p>
+          <p id="apiStatus" class="info-value status-waiting">Waiting...</p>
+        </div>
+
+        <div class="info-box">
+          <p class="info-label">Pulse ID</p>
+          <p id="pulseId" class="info-value">—</p>
+        </div>
+
+        <div class="info-box">
+          <p class="info-label">Timestamp</p>
+          <p id="pulseTime" class="info-value">—</p>
+        </div>
+
+        <div class="info-box">
+          <p class="info-label">Entropy Bits Used</p>
+          <p id="bitsUsed" class="info-value">—</p>
+        </div>
+
+        <div class="info-box">
+        <p class="info-label">Entropy Value</p>
+        <p id="entropyValue" class="info-value entropy-small">—</p>
+        </div>
+
+        <div class="info-box">
+        <p class="info-label">Entropy Source</p>
+        <p id="entropySource" class="info-value">—</p>
+        </div>
+
+        <div class="trust-chain">
+          <h3>⛓️ Trust Chain</h3>
+          <div class="chain-step" id="step1">🔬 Photon Source</div>
+          <div class="chain-arrow">↓</div>
+          <div class="chain-step" id="step2">⚛️ Entanglement</div>
+          <div class="chain-arrow">↓</div>
+          <div class="chain-step" id="step3">📡 CURBy Beacon</div>
+          <div class="chain-arrow">↓</div>
+          <div class="chain-step" id="step4">🎨 Your Art</div>
+        </div>
+        <p class="quantum-note">
+        Each artwork is generated from unpredictable photon measurements captured by the CURBy quantum beacon.
+        </p>
+
+      </section>
+
+    </main>
+
+    <footer>
+      <p>
+        Powered by
+        <a href="https://random.colorado.edu" target="_blank">
+          CURBy Quantum Beacon
+        </a>
+        — University of Colorado Boulder
+      </p>
+    </footer>
+
+    <script src="sketch.js"></script>
+
+  </body>
+</html>
