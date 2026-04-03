@@ -15,10 +15,15 @@ async function fetchQuantumEntropy() {
   document.getElementById('apiStatus').className = 'info-value status-fetching';
 
   try {
-    const pulse = await window.fetchCurbyPulse();
+    const response = await fetch(
+      'https://random.colorado.edu/beacon/2.0/pulse/last'
+    );
 
-    console.log('CURBy pulse:', pulse);
+    const data = await response.json();
 
+    console.log('CURBy data:', data);
+
+    const pulse = data.pulse || data;
     const outputValue =
       pulse.outputValue ||
       pulse.localRandomValue ||
@@ -32,7 +37,8 @@ async function fetchQuantumEntropy() {
 
     document.getElementById('apiStatus').textContent = '✅ Quantum Connected';
     document.getElementById('apiStatus').className = 'info-value status-connected';
-    document.getElementById('pulseId').textContent = pulse.pulseIndex || pulse.index || '—';
+    document.getElementById('pulseId').textContent =
+      pulse.pulseIndex || pulse.index || '—';
     document.getElementById('pulseTime').textContent =
       new Date(pulse.timeStamp || pulse.timestamp).toLocaleString();
     document.getElementById('entropyValue').textContent =
